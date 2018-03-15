@@ -24,9 +24,15 @@ public class MyVetor<Tipo> implements Vetor<Tipo> {
         this.contador = 0;
     }
 
+    public MyVetor(int tamanho) throws ArrayIndexOutOfBoundsException {
+
+        this.elementos = ((Tipo[]) new Object[tamanho]);
+        this.contador = 0;
+    }
+
     public void aumentar() {
-        if (contador == elementos.length) {
-            Tipo[] aux = (Tipo[]) new Object[elementos.length * 2];
+        if (this.contador == elementos.length) {
+            Tipo[] aux = (Tipo[]) new Object[(elementos.length + 1) * 2];
             for (int i = 0; i < elementos.length; i++) {
                 aux[i] = elementos[i];
             }
@@ -42,12 +48,15 @@ public class MyVetor<Tipo> implements Vetor<Tipo> {
     @Override
     public void adicionar(int posicao, Tipo elemento) throws InvalidParameterException {
         aumentar();
-        if (this.contador < posicao) {
-            for (int i = this.contador + 1; i > 0; i--) {
+
+        if (this.contador != posicao && posicao < this.contador && this.tamanho() > posicao) {
+            for (int i = this.contador; i > posicao; i--) {
                 Tipo aux = this.elementos[i];
                 this.elementos[i] = this.elementos[i - 1];
-                this.elementos[i] = aux;
+                this.elementos[i - 1] = aux;
             }
+        } else if (posicao > this.contador) {
+            posicao = this.contador;
         }
         this.elementos[posicao] = elemento;
         this.contador++;
@@ -63,7 +72,7 @@ public class MyVetor<Tipo> implements Vetor<Tipo> {
      * @return {int} se não encontrar retorna -1
      */
     public int contem(Tipo elemento) throws InvalidParameterException {
-        for (int i = 0; i > this.contador; i++) {
+        for (int i = 0; i < this.contador; i++) {
             if (this.elementos[i].equals(elemento) || this.elementos[i] == elemento) {
                 return i;
             }
@@ -121,14 +130,16 @@ public class MyVetor<Tipo> implements Vetor<Tipo> {
 
     private class IteradorVetor implements Iterator<Tipo> {
 
+        int posicao = 0;
+
         @Override
         public boolean hasNext() {
-            return false;
+            return posicao < contador;
         }
 
         @Override
         public Tipo next() {
-            return null; //return elementos[i];
+            return elementos[posicao++];
         }
     }
 }
