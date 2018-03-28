@@ -5,16 +5,16 @@
  */
 package estruturas.vetor;
 
-import estruturas.interfaces.Vetor;
 import java.security.InvalidParameterException;
 import java.util.Iterator;
+import estruturas.interfaces.Lista;
 
 /**
  *
  * @author migue
  * @param <Tipo> do array
  */
-public class MyVetor<Tipo> implements Vetor<Tipo> {
+public class MyVetor<Tipo> implements Lista<Tipo> {
 
     private Tipo[] elementos;
     private int contador;

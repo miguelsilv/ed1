@@ -7,7 +7,7 @@ import java.security.InvalidParameterException;
  * @author Miguel Silva(1271106300)
  * @param <Tipo> Tipo do vetor
  */
-public interface Vetor<Tipo> extends Iterable<Tipo> {
+public interface Lista<Tipo> extends Iterable<Tipo> {
 
     public void adicionar(Tipo elemento);
 
@@ -21,7 +21,9 @@ public interface Vetor<Tipo> extends Iterable<Tipo> {
 
     public int tamanho();
 
-    public int capacidade();
+    public default int capacidade() {
+        return Integer.MAX_VALUE;
+    }
 
     public void remover(int posicao) throws InvalidParameterException;
 
