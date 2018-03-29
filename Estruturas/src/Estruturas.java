@@ -1,6 +1,7 @@
 
 import estruturas.encadeada.MySimpleLinked;
 import estruturas.vetor.MyVetor;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -9,10 +10,7 @@ import estruturas.vetor.MyVetor;
 public class Estruturas {
 
     public static void main(String[] args) {
-
-        String ola = new String(new char[]{'O', 'l', 'á'});
-        System.out.println(ola);
-
+        JOptionPane.showMessageDialog(null, "Professor as atividades estão no pacote 'atividade'");
     }
 
 }
